@@ -2,11 +2,30 @@ from vitality_database.sql_querys import(
     consultar_alunos,
     consultar_professores,
     consultar_matriculas,
-    consultar_aulas,
-    inserir_ficha_treino,
-    consultar_ficha_aluno
 )
 
+
+def criar_senha():
+    senhas = []
+    print('CRIE UMA SENHA! ')
+    while True:
+        senha_admin = input('CRIE UMA SENHA: ')
+        if len(senha_admin) >= 8:
+            senhas.append(senha_admin)
+            print('SENHA CRIADA COM SUCESSO!')
+            break
+        else:
+            print('A SENHA DEVE CONTER NO MINIMO 8 CARACTERES')
+    return senhas, senha_admin
+
+def senha_menu(senhas):
+    while True:
+        senha_digitada = input('DIGITE A SENHA: ')
+        if senha_digitada in senhas:
+            print('ACESSANDO MENU...')
+            break
+        else:
+            print('SENHA INVALIDA!')
 
 def menu_admin():
     while True:
@@ -15,19 +34,14 @@ def menu_admin():
           ÁREA RESTRITA - ADMIN/PROFESSORES
 ====================================================
 
-   GESTÃO DE AULAS
-    [1] Montar Ficha
-    [2] Consultar Exercicios
-    [3] Visualizar Fichas
-
    CONSULTAS DO SISTEMA
-    [4] Consultar Alunos
-    [5] Consultar Professores
-    [6] Consultar Matrículas
+    [1] Consultar Alunos
+    [2] Consultar Professores
+    [3] Consultar Matrículas
 
    GERENCIAMENTO E EXCLUSÃO
-    [7] Cancelar Matrículas
-    [8] Exclusão de Profissionais
+    [4] Cancelar Matrículas
+    [5] Exclusão de Profissionais
 
    NAVEGAÇÃO
     [0] Sair / Voltar
@@ -37,26 +51,14 @@ def menu_admin():
         opcao_menu = input('\nOPCÃO:')
         match opcao_menu:
             case '1':
-                inserir_ficha_treino(
-                    aluno_id=10,
-                    exercicio_id=1,
-                    dia_treino="Terça-feira",
-                    num_series=4,
-                    num_repeticoes="10-12"
-                )
-            case '2':
-                 consultar_aulas()
-            case '3':
-                consultar_ficha_aluno(10)
-            case '4':
                 consultar_alunos()
-            case '5':
+            case '2':
                 consultar_professores()
-            case '6':
+            case '3':
                 consultar_matriculas()
-            case '7':
+            case '4':
                 print('SOMENTE PESSOAS AUTORIZADAS!')
-            case '8':
+            case '5':
                 print('SOMENTE PESSOAS AUTORIZADAS!')
             case '0':
                 break
