@@ -276,7 +276,7 @@ def deletar_tabela():
     conexao = sqlite3.connect("vitality.db")
     cursor = conexao.cursor()
     
-    cursor.execute("DROP TABLE IF EXISTS ficha_treino")
+    cursor.execute("DROP TABLE IF EXISTS exercicios")
     print('TABELA DELETADA COM SUCESSO!')
     conexao.commit()
     conexao.close()
@@ -287,3 +287,5 @@ def atualizar_dados():
     cursor.execute('UPDATE dados_alunos SET nome_aluno = "Lewandosky" WHERE id_aluno = 10')
     conexao.commit()
     cursor.close()
+
+deletar_tabela()
