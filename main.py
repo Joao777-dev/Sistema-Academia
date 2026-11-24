@@ -17,11 +17,10 @@ from datetime import (
 )
 
 from area_restrita.comandos_admin import(
-    menu_admin
+    menu_admin,
+    criar_senha,
+    senha_menu
 )
-
-senha_vitality = 'vitality123'
-
 
 def menu_cadastro():
     while True:
@@ -97,9 +96,9 @@ Recepção: (11) 4002-8922
 E-mail: contato@vitalityfitness.com''')           
             
             case '4':
-                senha_digitada = input('SENHA: ').strip()
-                if senha_digitada == senha_vitality:
-                    menu_admin()
+                lista_de_senhas, ultima_senha = criar_senha()
+                senha_menu(lista_de_senhas)
+                menu_admin()
             case '5':
                 print('FINALIZANDO...')
                 break
@@ -141,6 +140,7 @@ def plano_escolhido(id_usuario):
                 case '4':
                     id_usuario = menu_cadastro()
 
-id_usuario = menu_cadastro()
-if id_usuario:
-    plano_escolhido(id_usuario)
+while True:
+    id_usuario = menu_cadastro()
+    if id_usuario:
+        plano_escolhido(id_usuario)
