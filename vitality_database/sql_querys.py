@@ -17,7 +17,7 @@ def tabela_alunos():
     )''')
     conexao.commit()
     conexao.close()
-tabela_alunos()
+
 
 def inserir_alunos(nome_usuario, data_nasc, cpf_usuario, tel_usuario):
     conexao = sqlite3.connect("vitality.db")
@@ -66,7 +66,7 @@ def tabela_matriculas():
     plano_aluno VARCHAR(10) NOT NULL,
     aluno_id INT NOT NULL,
     data_matricula TEXT NOT NULL,
-    CONSTRAINT fk_matricula_aluno 
+    CONSTRAINT fk_matricula_aluno
     FOREIGN KEY (aluno_id)
     REFERENCES dados_alunos(id_aluno)
     )''')
@@ -83,93 +83,6 @@ def inserir_matriculas(plano_aluno, aluno_id, data_matricula):
     conexao.commit()
     conexao.close()
 
-
-#--------QUERYS PARA CRIAÇÃO E INSERÇÃO DE EXERCICIOS-------
-def tabela_exercicios():
-    conexao = sqlite3.connect("vitality.db")
-    conexao.execute("PRAGMA foreign_keys = ON")
-    cursor = conexao.cursor()
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS exercicios (
-        id_exercicio INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        nome_exercicio TEXT NOT NULL,
-        grupo_muscular TEXT NOT NULL
-    )'''
-    )
-
-def inserir_exercicios():
-  conexao = sqlite3.connect("vitality.db")
-  cursor = conexao.cursor()
-
-  lista_exercicios = [
-    ("Supino Reto com Barra", "Peito"),
-    ("Supino Inclinado com Halteres", "Peito"),
-    ("Tríceps na Polia com Barra", "Tríceps"),
-    ("Desenvolvimento com Halteres", "Ombros"),
-    
-    ("Puxada Alta na Polia", "Costas"),
-    ("Remada Baixa", "Costas"),
-    ("Rosca Direta com Barra", "Bíceps"),
-    ("Rosca Alternada", "Bíceps"),
-    
-    ("Agachamento Livre", "Pernas"),
-    ("Leg Press 45", "Pernas"),
-    ("Cadeira Extensora", "Pernas"),
-    ("Panturrilha Smith", "Pernas"),
-    
-    ("Elevação Lateral com Halteres", "Ombros"),
-    ("Desenvolvimento Militar", "Ombros"),
-    ("Encolhimento com Halteres", "Trapézio"),
-    ("Abdominal Supra no Solo", "Abdominais"),
-    ("Abdominal Infra na Paralela", "Abdominais"),
-    
-    ("Mesa Flexora", "Pernas"),
-    ("Stiff com Barra", "Pernas"),
-    ("Elevação Pélvica com Barra", "Glúteos"),
-    ("Panturrilha Sentada na Máquina", "Pernas"),
-]
-
-  cursor.executemany('''INSERT  INTO exercicios (nome_exercicio, grupo_muscular) 
-    VALUES (?, ?)''',
-    lista_exercicios,
-  )
-  conexao.commit()
-  conexao.close()
-
-def tabela_ficha_treino():
-    conexao = sqlite3.connect("vitality.db")
-    conexao.execute("PRAGMA foreign_keys = ON")
-    cursor = conexao.cursor()
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS ficha_treino (
-        id_ficha INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        aluno_id INTEGER NOT NULL,
-        exercicio_id INTEGER NOT NULL,
-        dia_treino TEXT NOT NULL,
-        num_series INTEGER NOT NULL,
-        num_repeticoes TEXT NOT NULL,
-        CONSTRAINT fk_aluno_ficha 
-            FOREIGN KEY (aluno_id) 
-            REFERENCES dados_alunos(id_aluno),
-        CONSTRAINT fk_exercicio_ficha 
-            FOREIGN KEY (exercicio_id) 
-            REFERENCES exercicios(id_exercicio)
-    )''')
-    conexao.commit()
-    conexao.close()
-
-def inserir_ficha_treino(aluno_id, exercicio_id, dia_treino, num_series, num_repeticoes):
-    conexao = sqlite3.connect("vitality.db")
-    conexao.execute("PRAGMA foreign_keys = ON")
-    cursor = conexao.cursor()
-    
-    sql_query = '''
-        INSERT INTO ficha_treino (aluno_id, exercicio_id, dia_treino, num_series, num_repeticoes) 
-        VALUES (?, ?, ?, ?, ?)
-    '''
-    cursor.execute(sql_query, (aluno_id, exercicio_id, dia_treino, num_series, num_repeticoes))
-    conexao.commit()
-    conexao.close()
 
 #---------QUERYS PARA CONSULTAS---------
 
@@ -226,9 +139,9 @@ def consultar_aulas():
 def consultar_ficha_aluno(aluno_id):
     conexao = sqlite3.connect("vitality.db")
     cursor = conexao.cursor()
-    
+
     sql_query = '''
-        SELECT 
+        SELECT
             da.nome_aluno,
             ft.dia_treino,
             e.nome_exercicio,
@@ -240,18 +153,18 @@ def consultar_ficha_aluno(aluno_id):
         JOIN exercicios e ON ft.exercicio_id = e.id_exercicio
         WHERE ft.aluno_id = ?
     '''
-    
+
     cursor.execute(sql_query, (aluno_id,))
     ficha_consultada = cursor.fetchall()
     print(f'{'NOME':<20} {'DIA':<25} {'EXERCICIO':<30} {'GRUPO':<32} {'SERIES':<30} {'REPETIÇÕES':<35}')
     print('-' * 200)
-    
+
     for ficha in ficha_consultada:
         print(f'{ficha[0]:<20} {ficha[1]:<25} {ficha[2]:<30} {ficha[3]:<32} {ficha[4]:<30} {ficha[5]:35}')
     conexao.close()
 
 
-#---------QUERYS DE CANCELAMENTO/EXCLUSÃO---------   
+#---------QUERYS DE CANCELAMENTO/EXCLUSÃO---------
 
 def cancelamento_matricula(id_usuario):
     conexao = sqlite3.connect("vitality.db")
@@ -267,7 +180,7 @@ def cancelamento_matricula(id_usuario):
 def cancelamento_professores(id_usuario):
     conexao = sqlite3.connect("vitality.db")
     cursor = conexao.cursor()
-    cursor.execute("DELETE FROM dados_professores WHERE id_professor >= ?", (id_usuario,))   
+    cursor.execute("DELETE FROM dados_professores WHERE id_professor >= ?", (id_usuario,))
     conexao.commit()
     conexao.close()
     print('PROFESSOR EXCLUIDO COM SUCESSO! ')
@@ -275,7 +188,7 @@ def cancelamento_professores(id_usuario):
 def deletar_tabela():
     conexao = sqlite3.connect("vitality.db")
     cursor = conexao.cursor()
-    
+
     cursor.execute("DROP TABLE IF EXISTS exercicios")
     print('TABELA DELETADA COM SUCESSO!')
     conexao.commit()
