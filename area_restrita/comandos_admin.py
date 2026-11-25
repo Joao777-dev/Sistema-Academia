@@ -1,9 +1,11 @@
 from vitality_database.sql_querys import(
     consultar_alunos,
     consultar_professores,
-    consultar_matriculas,
+    consultar_matriculas
 )
-
+from alterar_dados.menu_alterar import (
+    alterar_cadastro
+)
 
 def criar_senha():
     senhas = []
@@ -39,9 +41,12 @@ def menu_admin():
     [2] Consultar Professores
     [3] Consultar Matrículas
 
+    ALTERAR DADOS DOS ALUNOS
+    [4] ALTERAR DADOS
+    [5] ALTERAR PLANO
    GERENCIAMENTO E EXCLUSÃO
-    [4] Cancelar Matrículas
-    [5] Exclusão de Profissionais
+    [6] Cancelar Matrículas
+    [7] Exclusão de Profissionais
 
    NAVEGAÇÃO
     [0] Sair / Voltar
@@ -57,7 +62,7 @@ def menu_admin():
             case '3':
                 consultar_matriculas()
             case '4':
-                print('SOMENTE PESSOAS AUTORIZADAS!')
+                id_aluno = alterar_cadastro()
             case '5':
                 print('SOMENTE PESSOAS AUTORIZADAS!')
             case '0':
