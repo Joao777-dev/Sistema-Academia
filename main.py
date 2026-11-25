@@ -24,7 +24,7 @@ from area_restrita.comandos_admin import(
 
 def menu_cadastro():
     while True:
-        print(''' 
+        print('''
 [1] CADASTRAR ALUNO
 [2] CADASTRAR PROFESSOR
 [3] SAIBA MAIS
@@ -57,7 +57,7 @@ def menu_cadastro():
     📌 NOSSOS PLANOS:
 
     [ BRONZE ] - R$ 89,90/mês
-    
+
 Acesso à área de musculação
 Horário livre
 Refil de Pré Treino
@@ -65,43 +65,43 @@ Refil de Pré Treino
 Sem direito a aulas coletivas
 
     [ PRATA ] - R$ 119,90/mês
-    
+
 Musculação + Refil de Pré Treino + Área Cardio  + Muay Thai + Zumba
 Direito a 2 aulas coletivas por semana
 1 Avaliação física mensal gratuita
 
     [ OURO ] - R$ 149,90/mês (VIP)
-    
+
 Acesso total e ilimitado (Musculação + Aulas + Muay Thai + Zumba)
 Direito a trazer 5 convidados mensais
 Armário privativo e acompanhamento personalizado
 
 ---------------------------------------------------
     ⏰ HORÁRIO DE FUNCIONAMENTO:
-    
+
 Segunda a Sexta: 06:00 às 22:00
 Sábados e Feriados: 08:00 às 14:00
 
 ---------------------------------------------------
     📋 REGRAS DE CONVIVÊNCIA:
-    
+
 Uso obrigatório de toalha de treino.
 Guarde os pesos e anilhas após o uso.
 Respeite as orientações dos professores.
 
 ---------------------------------------------------
     📞 DÚVIDAS E SUPORTE:
-    
+
 Recepção: (11) 4002-8922
-E-mail: contato@vitalityfitness.com''')           
-            
+E-mail: contato@vitalityfitness.com''')
+
             case '4':
                 lista_de_senhas, ultima_senha = criar_senha()
                 senha_menu(lista_de_senhas)
                 menu_admin()
             case '5':
                 print('FINALIZANDO...')
-                break
+                exit()
 
 def plano_escolhido(id_usuario):
         while True:
