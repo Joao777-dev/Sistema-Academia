@@ -6,10 +6,10 @@ from planos_alunos.planos import (
     plano_prata,
     plano_ouro
 )
-from vitality_database.sql_querys import (
+from vitality_database.schema import (
     inserir_alunos,
     inserir_matriculas,
-    inserir_professores,
+    inserir_professores
 )
 
 from datetime import (
