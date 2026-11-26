@@ -4,14 +4,15 @@ from vitality_database.sql_querys import(
     consultar_matriculas
 )
 from alterar_dados.menu_alterar import (
-    alterar_cadastro
+    alterar_cadastro,
+    alterar_plano
 )
 
 def criar_senha():
     senhas = []
-    print('CRIE UMA SENHA! ')
+    print('CRIE UMA SENHA!\n ')
     while True:
-        senha_admin = input('CRIE UMA SENHA: ')
+        senha_admin = input('DIGITE SUA SENHA: ')
         if len(senha_admin) >= 8:
             senhas.append(senha_admin)
             print('SENHA CRIADA COM SUCESSO!')
@@ -22,7 +23,7 @@ def criar_senha():
 
 def senha_menu(senhas):
     while True:
-        senha_digitada = input('DIGITE A SENHA: ')
+        senha_digitada = input('CONFIRME A SENHA: ')
         if senha_digitada in senhas:
             print('ACESSANDO MENU...')
             break
@@ -64,6 +65,6 @@ def menu_admin():
             case '4':
                 id_aluno = alterar_cadastro()
             case '5':
-                print('SOMENTE PESSOAS AUTORIZADAS!')
+                alterar_plano()
             case '0':
                 break
