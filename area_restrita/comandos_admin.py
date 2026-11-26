@@ -1,11 +1,12 @@
-from vitality_database.sql_querys import(
+from vitality_database.queries.alunos import(
     consultar_alunos,
-    consultar_professores,
-    consultar_matriculas
-)
-from alterar_dados.menu_alterar import (
+    consultar_matriculas,
+    cancelamento_matricula,
     alterar_cadastro,
     alterar_plano
+)
+from vitality_database.queries.professores import(
+    consultar_professores
 )
 
 def criar_senha():
@@ -63,8 +64,10 @@ def menu_admin():
             case '3':
                 consultar_matriculas()
             case '4':
-                id_aluno = alterar_cadastro()
+                alterar_cadastro()
             case '5':
                 alterar_plano()
+            case '6':
+                cancelamento_matricula()
             case '0':
                 break
