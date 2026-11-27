@@ -8,6 +8,11 @@ from vitality_database.queries.alunos import(
 from vitality_database.queries.professores import(
     consultar_professores
 )
+from relatorios.menu_relatorios import(
+    menu_relatorio
+)
+
+
 
 def criar_senha():
     senhas = []
@@ -46,9 +51,13 @@ def menu_admin():
     ALTERAR DADOS DOS ALUNOS
     [4] ALTERAR DADOS
     [5] ALTERAR PLANO
+
    GERENCIAMENTO E EXCLUSÃO
     [6] Cancelar Matrículas
     [7] Exclusão de Profissionais
+
+   RELATÓRIOS E ANÁLISES DE DADOS
+   [8] RELATORIOS
 
    NAVEGAÇÃO
     [0] Sair / Voltar
@@ -69,5 +78,9 @@ def menu_admin():
                 alterar_plano()
             case '6':
                 cancelamento_matricula()
+            case '7':
+                print('a')
+            case '8':
+                    menu_relatorio()
             case '0':
                 break
